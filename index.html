@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🇨🇳 대련 여행 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@700;900&display=swap');
+
+  :root {
+    --red: #E53935;
+    --red-light: #FF6B6B;
+    --gold: #FFB300;
+    --gold-light: #FFD54F;
+    --bg: #0D0D0D;
+    --bg2: #161616;
+    --bg3: #1E1E1E;
+    --bg4: #252525;
+    --text: #F0F0F0;
+    --text2: #A0A0A0;
+    --border: #2E2E2E;
+    --green: #4CAF50;
+    --blue: #42A5F5;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  
+  html { font-size: 16px; }
+  
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 20px;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #8B0000 0%, #C62828 40%, #E53935 70%, #FF5722 100%);
+    padding: 32px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .hero::after {
+    content: '大連';
+    position: absolute;
+    bottom: -10px; right: 10px;
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.07);
+    letter-spacing: -4px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .hero-flag { font-size: 28px; margin-bottom: 6px; }
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+  .hero-people {
+    display: flex;
+    gap: 6px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .person-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+  }
+  .hero-dates {
+    margin-top: 14px;
+    background: rgba(0,0,0,0.2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .date-item { text-align: center; }
+  .date-label { font-size: 10px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; }
+  .date-val { font-size: 15px; font-weight: 700; color: white; margin-top: 2px; }
+  .date-sep { color: rgba(255,255,255,0.4); font-size: 20px; }
+
+  /* ── 상단 탭 (CSS :target 방식 — JS 불필요) ── */
+  .tab-bar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    background: #111;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-link {
+    flex: 1;
+    min-width: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 10px 6px;
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .tab-link .nav-icon { font-size: 18px; display:block; }
+  /* :target 으로 활성 탭 표시 */
+  #page-schedule:target ~ .tab-bar .tab-link[href="#page-schedule"],
+  #page-booking:target ~ .tab-bar .tab-link[href="#page-booking"],
+  #page-budget:target ~ .tab-bar .tab-link[href="#page-budget"],
+  #page-tips:target ~ .tab-bar .tab-link[href="#page-tips"] {
+    color: var(--red-light);
+    border-bottom-color: var(--red-light);
+  }
+  /* 기본(아무것도 :target 아닐 때) 첫 탭 활성 */
+  .tab-link.default-active {
+    color: var(--red-light);
+    border-bottom-color: var(--red-light);
+  }
+
+  /* PAGES — :target 으로 전환, JS 불필요 */
+  .page { display: none; padding: 0 0 20px; scroll-margin-top: 50px; }
+  /* 기본: schedule 표시 */
+  #page-schedule { display: block; }
+  /* :target 된 페이지만 표시, 나머지 숨김 */
+  #page-schedule:target,
+  #page-booking:target,
+  #page-budget:target,
+  #page-tips:target { display: block; }
+  #page-schedule:target ~ #page-booking,
+  #page-schedule:target ~ #page-budget,
+  #page-schedule:target ~ #page-tips { display: none; }
+  #page-booking:target ~ #page-budget,
+  #page-booking:target ~ #page-tips { display: none; }
+  #page-budget:target ~ #page-tips { display: none; }
+  /* schedule가 target일 때 booking/budget/tips 숨김은 위에서 처리
+     booking이 target이면 schedule도 숨겨야 함 */
+  body:has(#page-booking:target) #page-schedule,
+  body:has(#page-budget:target) #page-schedule,
+  body:has(#page-budget:target) #page-booking,
+  body:has(#page-tips:target) #page-schedule,
+  body:has(#page-tips:target) #page-booking,
+  body:has(#page-tips:target) #page-budget { display: none; }
+
+  /* SECTION COMMON */
+  .section { padding: 16px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    padding-left: 2px;
+  }
+
+  /* DAY CARD */
+  .day-header {
+    margin: 0 16px 12px;
+    background: linear-gradient(135deg, var(--bg3), var(--bg4));
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .day-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--red);
+  }
+  .day-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .day-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .day-subtitle {
+    font-size: 12px;
+    color: var(--text2);
+    margin-top: 4px;
+  }
+  .weather-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(66,165,245,0.15);
+    border: 1px solid rgba(66,165,245,0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--blue);
+    margin-top: 8px;
+  }
+
+  /* TIMELINE */
+  .timeline { padding: 0 16px; }
+  .tl-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .tl-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px;
+    flex-shrink: 0;
+  }
+  .tl-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    padding-top: 14px;
+  }
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-top: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(229,57,53,0.2);
+  }
+  .tl-dot.optional { background: var(--text2); box-shadow: 0 0 0 3px rgba(160,160,160,0.15); }
+  .tl-line {
+    width: 2px;
+    background: var(--border);
+    flex: 1;
+    min-height: 20px;
+    margin-top: 4px;
+  }
+  .tl-content {
+    flex: 1;
+    background: var(--bg3);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .tl-content.food { border-left: 3px solid var(--red); }
+  .tl-content.place { border-left: 3px solid var(--gold); }
+  .tl-content.cafe { border-left: 3px solid #7E57C2; }
+  .tl-content.hotel { border-left: 3px solid var(--blue); }
+  .tl-content.transport { border-left: 3px solid var(--green); }
+  .tl-content.optional-item { border-left: 3px solid var(--text2); opacity: 0.8; }
+
+  .tl-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .tl-desc {
+    font-size: 12px;
+    color: var(--text2);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .tl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
+  .tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .tag-food { background: rgba(229,57,53,0.15); color: var(--red-light); }
+  .tag-tip { background: rgba(255,179,0,0.15); color: var(--gold); }
+  .tag-place { background: rgba(255,179,0,0.12); color: var(--gold-light); }
+  .tag-cafe { background: rgba(126,87,194,0.15); color: #CE93D8; }
+  .tag-opt { background: rgba(160,160,160,0.12); color: var(--text2); }
+
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 44px;
+    position: relative;
+    z-index: 1;
+  }
+  .map-btn:active { opacity: 0.7; }
+
+  /* FLIGHT CARD */
+  .flight-card {
+    margin: 16px;
+    background: var(--bg3);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .flight-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .flight-airline {
+    font-size: 20px;
+  }
+  .flight-info { flex: 1; }
+  .flight-route {
+    font-size: 12px;
+    color: var(--text2);
+    font-weight: 500;
+  }
+  .flight-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--red-light);
+  }
+  .flight-times {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg4);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+  .flight-airport { text-align: center; }
+  .airport-time {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .airport-code {
+    font-size: 11px;
+    color: var(--text2);
+    margin-top: 3px;
+  }
+  .flight-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: var(--text2);
+    font-size: 11px;
+  }
+  .flight-arrow-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--text2), var(--red-light));
+    position: relative;
+  }
+  .flight-arrow-line::after {
+    content: '✈';
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    font-size: 14px;
+    color: var(--red-light);
+  }
+  .flight-duration {
+    font-size: 10px;
+    color: var(--text2);
+  }
+  .pnr-info {
+    margin-top: 12px;
+    background: rgba(229,57,53,0.08);
+    border: 1px solid rgba(229,57,53,0.2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pnr-label { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; }
+  .pnr-val { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: var(--gold); }
+
+  /* BUDGET */
+  .budget-total {
+    margin: 16px;
+    background: linear-gradient(135deg, #1A0000, #2D0000);
+    border: 1px solid rgba(229,57,53,0.3);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .budget-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+  .budget-amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+  .budget-per { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+  .budget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--bg3);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+  .budget-item-left { display: flex; align-items: center; gap: 10px; }
+  .budget-icon { font-size: 18px; }
+  .budget-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .budget-note { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .budget-price { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); }
+  .budget-price.green { color: var(--green); }
+  .budget-price.gold { color: var(--gold); }
+
+  .budget-bar-wrap { margin: 0 16px 8px; }
+  .budget-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text2); margin-bottom: 5px; }
+  .budget-bar { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .budget-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+
+  /* CURRENCY */
+  .currency-card {
+    margin: 16px;
+    background: var(--bg3);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .currency-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+  .currency-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .currency-input-wrap { flex: 1; }
+  .currency-label { font-size: 10px; color: var(--text2); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .currency-input {
+    width: 100%;
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--text);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .currency-input:focus { border-color: var(--red); }
+  .currency-swap {
+    padding-top: 18px;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text2);
+  }
+  .currency-result {
+    background: linear-gradient(135deg, rgba(229,57,53,0.1), rgba(255,179,0,0.08));
+    border: 1px solid rgba(229,57,53,0.2);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .currency-result-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--gold);
+  }
+  .currency-result-unit { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+  .rate-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg4);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+  .rate-label { color: var(--text2); }
+  .rate-val { font-weight: 700; color: var(--gold); font-family: 'Montserrat', sans-serif; }
+
+  /* TIPS */
+  .tip-card {
+    margin: 0 16px 10px;
+    background: var(--bg3);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+  }
+  .tip-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tip-body { font-size: 12px; color: var(--text2); line-height: 1.7; }
+  .tip-body strong { color: var(--text); font-weight: 600; }
+
+  /* HOTEL */
+  .hotel-card {
+    margin: 16px;
+    background: var(--bg3);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hotel-top {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hotel-name { font-size: 16px; font-weight: 700; color: var(--text); }
+  .hotel-address { font-size: 11px; color: var(--text2); margin-top: 4px; line-height: 1.4; }
+  .hotel-body { padding: 14px 16px; }
+  .hotel-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .hotel-row:last-child { border-bottom: none; }
+  .hotel-key { color: var(--text2); }
+  .hotel-val { font-weight: 600; color: var(--text); }
+  .hotel-val.highlight { color: var(--gold); }
+
+  /* CHECKLIST */
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: var(--bg3);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background 0.15s;
+    min-height: 50px;
+    position: relative;
+    z-index: 1;
+    /* label 태그 기본 스타일 리셋 */
+    user-select: none;
+    -webkit-user-select: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .checklist-item:active { background: var(--bg4); }
+  .checklist-item.checked { opacity: 0.5; }
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    transition: all 0.15s;
+  }
+  .check-box.done { background: var(--green); border-color: var(--green); }
+  .check-text { font-size: 13px; color: var(--text); flex: 1; line-height: 1.4; }
+  .checklist-item.checked .check-text { text-decoration: line-through; color: var(--text2); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 16px 16px;
+  }
+
+  /* OPTIONAL BADGE */
+  .opt-badge {
+    display: inline-block;
+    background: rgba(160,160,160,0.12);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1px 7px;
+    font-size: 10px;
+    color: var(--text2);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* SCROLL FIX */
+  .scroll-content { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ACCORDION */
+  .acc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--bg3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .acc-header:active { background: var(--bg4); }
+  .acc-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .acc-arrow { font-size: 12px; color: var(--text2); transition: transform 0.2s; }
+  .acc-header.open .acc-arrow { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 0 4px 8px; }
+  .acc-body.open { display: block; }
+
+  /* NOTICE */
+  .notice {
+    margin: 0 16px 10px;
+    background: rgba(255,179,0,0.08);
+    border: 1px solid rgba(255,179,0,0.25);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: rgba(255,213,79,0.9);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-flag">🇨🇳</div>
+  <div class="hero-title">대련 여행<br>2026</div>
+  <div class="hero-sub">중국 다롄 · 2박 3일 가족여행</div>
+  <div class="hero-people">
+    <span class="person-chip">👩 은주</span>
+    <span class="person-chip">👧 다현</span>
+    <span class="person-chip">👦 다훈</span>
+    <span class="person-chip">👩 미영</span>
+    <span class="person-chip">👩 미경</span>
+  </div>
+  <div class="hero-dates">
+    <div class="date-item">
+      <div class="date-label">출발</div>
+      <div class="date-val">5월 1일</div>
+    </div>
+    <div class="date-sep">→</div>
+    <div class="date-item">
+      <div class="date-label">귀국</div>
+      <div class="date-val">5월 3일</div>
+    </div>
+    <div class="date-sep">·</div>
+    <div class="date-item">
+      <div class="date-label">인원</div>
+      <div class="date-val">5명</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOP TAB BAR -->
+<div class="tab-bar">
+  <a class="tab-link default-active" href="#page-schedule"><span class="nav-icon">🗓️</span>일정</a>
+  <a class="tab-link" href="#page-booking"><span class="nav-icon">✈️</span>항공·숙소</a>
+  <a class="tab-link" href="#page-budget"><span class="nav-icon">💰</span>경비·환율</a>
+  <a class="tab-link" href="#page-tips"><span class="nav-icon">💡</span>꿀팁</a>
+</div>
+
+<!-- PAGES -->
+
+<!-- ===== PAGE: 일정 ===== -->
+<div class="page active" id="page-schedule">
+
+  <!-- DAY 1 -->
+  <div style="height:16px"></div>
+  <div class="day-header">
+    <div class="day-num">Day 1 · 5월 1일 금요일</div>
+    <div class="day-title">✈️ 대련 랜드마크 투어</div>
+    <div class="day-subtitle">인천 출발 → 저우수이쯔 도착 → 시내 관광 → 야경</div>
+    <div class="weather-badge">🌤️ 5월 대련 평균 15~20°C · 가벼운 겉옷 추천</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">11:25</div>
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content transport">
+        <div class="tl-name">✈️ 인천국제공항 T1 출발</div>
+        <div class="tl-desc">중국남방항공 CZ686 · 에어버스 A321<br>일반석 · 기내식 불포함</div>
+        <div class="tl-tags">
+          <span class="tag tag-tip">PNR: NW28EK</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">11:40</div>
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content transport">
+        <div class="tl-name">🛬 저우수이쯔국제공항 도착</div>
+        <div class="tl-desc">대련 DLC 공항 · 입국 심사 후 셔틀 탑승</div>
+        <div class="tl-tags">
+          <span class="tag tag-tip">💡 공항 셔틀 약 10위안</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">~12:30</div>
+        <div class="tl-dot" style="background:var(--blue)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content hotel">
+        <div class="tl-name">🏨 칭니8호 아파트먼트 도착 · 짐 보관</div>
+        <div class="tl-desc">체크인 14:00 이후 · 짐만 먼저 맡기고 출발</div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%EC%B9%AD%EB%8B%888%ED%98%B8%20%EC%95%84%ED%8C%8C%ED%8A%B8%EB%A8%BC%ED%8A%B8%20%EB%8C%80%EB%A0%A8%20%EC%A4%91%EC%82%B0%EA%B5%AC&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">~13:30</div>
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content food">
+        <div class="tl-name">🦔 시딩 (喜鼎) — 점심 · 성게만두</div>
+        <div class="tl-desc">대련 명물! 성게알이 가득 든 바삭한 만두<br><strong>브레이크타임 주의: 15:00~17:00</strong></div>
+        <div class="tl-tags">
+          <span class="tag tag-food">성게만두</span>
+          <span class="tag tag-tip">⚠️ 웨이팅 있음 · 일찍 도착 추천</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E5%96%9C%E9%BC%8E%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">14:00</div>
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content place">
+        <div class="tl-name">🏰 러시아 거리 · 동방수성</div>
+        <div class="tl-desc">러시아풍 고풍스러운 건축물 + 베네치아식 운하 & 수로. 보트 탑승 가능 (5월 운영 확인 권장)</div>
+        <div class="tl-tags">
+          <span class="tag tag-place">포토스팟</span>
+          <span class="tag tag-place">운하 보트 투어</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E4%B8%9C%E6%96%B9%E6%B0%B4%E5%9F%8E%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">오후</div>
+        <div class="tl-dot" style="background:#7E57C2"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content cafe">
+        <div class="tl-name">☕ 카페 휴식</div>
+        <div class="tl-desc">
+          <strong>위안롱 커피 (远容咖啡)</strong> — 탁 트인 바다 직관 뷰<br>
+          <strong>굿빈즈 (Good Beans)</strong> — 운하 & 건물 야경 뷰<br>
+          5명 함께 앉기에 두 곳 모두 충분히 넓음
+        </div>
+        <div class="tl-tags">
+          <span class="tag tag-cafe">바다 전망</span>
+          <span class="tag tag-cafe">야경</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">늦은<br>오후</div>
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content place">
+        <div class="tl-name">🌊 성해광장 — 야경 명소</div>
+        <div class="tl-desc">아시아 최대 규모 광장 · 해안 광장 · 광안대교 야경<br>화려한 조명과 분수쇼 감상</div>
+        <div class="tl-tags">
+          <span class="tag tag-place">야경 필수</span>
+          <span class="tag tag-place">분수쇼</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E6%98%9F%E6%B5%B7%E5%B9%BF%E5%9C%BA%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">저녁</div>
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content food">
+        <div class="tl-name">🍲 저녁 — 중국 전통 구리솥 훠궈 (미정)</div>
+        <div class="tl-desc">대련식 훠궈 또는 해산물 요리 · 장소 현지 상황 확인 후 결정</div>
+        <div class="tl-tags">
+          <span class="tag tag-food">훠궈</span>
+          <span class="tag tag-opt">미정</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">19:30</div>
+        <div class="tl-dot optional"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content optional-item">
+        <div class="tl-name">🌈 성해광장 레이저쇼 <span class="opt-badge">선택</span></div>
+        <div class="tl-desc">약 15분 · 화려한 레이저 & 음악 쇼 · 선택사항</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">밤</div>
+        <div class="tl-dot" style="background:var(--blue)"></div>
+        <div class="tl-line" style="min-height:0"></div>
+      </div>
+      <div class="tl-content hotel">
+        <div class="tl-name">🏨 숙소 복귀 · 야시장 & 마트 쇼핑</div>
+        <div class="tl-desc">간식 / 과일 구매 · 숙소 체크인</div>
+        <div class="tl-tags">
+          <span class="tag tag-tip">💡 체크인 14:00 이후 (짐은 미리 보관)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DAY 2 -->
+  <div class="day-header">
+    <div class="day-num">Day 2 · 5월 2일 토요일</div>
+    <div class="day-title">🚶 시내 도보 감성 투어 & 휴식</div>
+    <div class="day-subtitle">중산광장 → 동관지에 → 쇼핑 → 오리 → 마사지</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">아침</div>
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content food">
+        <div class="tl-name">🥟 현지식 아침 — 희가덕 만두 & 지엔빙</div>
+        <div class="tl-desc">중국식 아침 식사 · 찹쌀 크레페 지엔빙은 현지 노점에서 즐기기 좋음</div>
+        <div class="tl-tags">
+          <span class="tag tag-food">현지 아침</span>
+          <span class="tag tag-tip">가성비 최고</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">오전</div>
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content place">
+        <div class="tl-name">🏛️ 중산광장 → 동관지에 산책</div>
+        <div class="tl-desc">유럽풍 방사형 광장 (인사동st 느낌의 골목). 트램 거리 · 고풍스러운 건물 · 골목 탐방</div>
+        <div class="tl-tags">
+          <span class="tag tag-place">트램</span>
+          <span class="tag tag-place">포토스팟</span>
+          <span class="tag tag-place">산책 코스</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E4%B8%AD%E5%B1%B1%E5%B9%BF%E5%9C%BA%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">오전<br>카페</div>
+        <div class="tl-dot" style="background:#7E57C2"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content cafe">
+        <div class="tl-name">☕ 카페 휴식 (미정)</div>
+        <div class="tl-desc">
+          <strong>모후 (寞狐)</strong> 또는 <strong>부단 (不断)</strong> 추천<br>
+          중산광장 인근 · 추가 리서치 예정
+        </div>
+        <div class="tl-tags">
+          <span class="tag tag-cafe">감성 카페</span>
+          <span class="tag tag-opt">미정</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">점심<br>&amp; 오후</div>
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content food">
+        <div class="tl-name">🐟 파빌리온 쇼핑몰 — 밍지카오위</div>
+        <div class="tl-desc">현지 인기 생선구이 맛집 · 직원 추천 반반세트 (생선 2종 + 소스 2개 + 토핑). 마늘맛 + 마라맛 조합 강추!</div>
+        <div class="tl-tags">
+          <span class="tag tag-food">생선구이</span>
+          <span class="tag tag-tip">💡 도미 + 마늘소스 추천</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E5%90%8D%E6%B1%81%E7%83%A4%E9%B1%BC%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">디저트</div>
+        <div class="tl-dot" style="background:#7E57C2"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content cafe">
+        <div class="tl-name">🧋 모어 요거트 · 루이싱 커피</div>
+        <div class="tl-desc">쇼핑몰 내 디저트 타임 · 루이싱 커피는 중국 저가 커피 브랜드 (스벅의 1/3 가격)</div>
+        <div class="tl-tags">
+          <span class="tag tag-cafe">요거트</span>
+          <span class="tag tag-tip">💡 루이싱 앱 첫 주문 할인</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">오후</div>
+        <div class="tl-dot" style="background:var(--blue)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content hotel">
+        <div class="tl-name">🛏️ 숙소 복귀 · 각자 휴식</div>
+        <div class="tl-desc">엄마들 → 숙소 휴식 (체력 충전)<br>딸들 → 마트 기념품 쇼핑</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">17:00</div>
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content food">
+        <div class="tl-name">🦆 신흥전승오리 — 북경오리</div>
+        <div class="tl-desc">이른 저녁으로 웨이팅 방지. 대련 현지인 추천 북경오리 맛집</div>
+        <div class="tl-tags">
+          <span class="tag tag-food">북경오리</span>
+          <span class="tag tag-tip">⚠️ 17시 이른 입장으로 웨이팅 방지</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E6%96%B0%E5%85%B4%E5%85%A8%E8%81%9A%E7%83%A4%E9%B8%AD%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">저녁</div>
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content place">
+        <div class="tl-name">💆 발마사지 — 정원원 (예약 예정)</div>
+        <div class="tl-desc">예약 가능 여부 사전 문의 필요. 2박 3일 여독 풀기</div>
+        <div class="tl-tags">
+          <span class="tag tag-tip">📞 사전 예약 문의 필요</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">2차</div>
+        <div class="tl-dot optional" style="min-height:0"></div>
+        <div class="tl-line" style="min-height:0"></div>
+      </div>
+      <div class="tl-content optional-item">
+        <div class="tl-name">🍢 흐어띠우이즈시에 <span class="opt-badge">선택</span></div>
+        <div class="tl-desc">대련식 야식 · 현지 분위기 만끽</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DAY 3 -->
+  <div class="day-header">
+    <div class="day-num">Day 3 · 5월 3일 일요일</div>
+    <div class="day-title">🌿 오전 산책 · 체크아웃 · 귀국</div>
+    <div class="day-subtitle">노동공원 → 체크아웃 → 공항 → 인천</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">아점</div>
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content food">
+        <div class="tl-name">🥢 숙소 근처 현지인 맛집 (아점)</div>
+        <div class="tl-desc">숙소 주변 현지 식당에서 느긋하게</div>
+        <div class="tl-tags">
+          <span class="tag tag-food">현지식</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">오전</div>
+        <div class="tl-dot" style="background:var(--gold)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content place">
+        <div class="tl-name">🌳 노동공원 산책</div>
+        <div class="tl-desc">중국스러운 전통 공원 · 현지인 아침 산책 코스 · 느긋하게 둘러보기</div>
+        <div class="tl-tags">
+          <span class="tag tag-place">공원 산책</span>
+          <span class="tag tag-place">현지 분위기</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E5%8A%B3%E5%8A%A8%E5%85%AC%E5%9B%AD%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">오전<br>쇼핑</div>
+        <div class="tl-dot" style="background:#7E57C2"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content cafe">
+        <div class="tl-name">🥐 홀리랜드 (Holiland) — 에그타르트 포장</div>
+        <div class="tl-desc">중국 국민 베이커리 · 에그타르트 포장해서 기내 or 귀국 간식으로</div>
+        <div class="tl-tags">
+          <span class="tag tag-tip">💡 소프트 에그타르트 강추</span>
+        </div>
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E5%A5%BD%E5%88%A9%E6%9D%A5%20%E5%A4%A7%E8%BF%9E&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">11:30</div>
+        <div class="tl-dot" style="background:var(--blue)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content hotel">
+        <div class="tl-name">🏨 체크아웃 · 공항 이동</div>
+        <div class="tl-desc">체크아웃 14:00 이전 · 레이트 체크아웃 리워드 있음 (숙소에 확인)<br>공항까지 약 30분 소요</div>
+        <div class="tl-tags">
+          <span class="tag tag-tip">💡 레이트 체크아웃 리워드 확인!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">14:00</div>
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content transport">
+        <div class="tl-name">✈️ 저우수이쯔공항 출발</div>
+        <div class="tl-desc">중국남방항공 CZ695 · 에어버스 A320<br>일반석 · 기내식 불포함</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-time">16:15</div>
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-line" style="min-height:0"></div>
+      </div>
+      <div class="tl-content transport">
+        <div class="tl-name">🛬 인천국제공항 T1 도착</div>
+        <div class="tl-desc">수하물 수령 후 귀가 🏠</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height:10px"></div>
+</div>
+
+<!-- ===== PAGE: 항공 & 숙소 ===== -->
+<div class="page" id="page-booking">
+  <div style="height:16px"></div>
+  <div class="section">
+    <div class="section-title">✈️ 항공 정보</div>
+  </div>
+
+  <div class="flight-card">
+    <div class="pnr-info">
+      <div>
+        <div class="pnr-label">항공사 예약번호 (PNR)</div>
+        <div class="pnr-val">NW28EK</div>
+      </div>
+      <div style="font-size:11px;color:var(--text2);text-align:right">중국남방항공<br>5인 전체</div>
+    </div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-header">
+      <div class="flight-airline">🛫</div>
+      <div class="flight-info">
+        <div class="flight-route">가는편 · 2026년 5월 1일</div>
+        <div class="flight-num">CZ686</div>
+      </div>
+      <div style="font-size:11px;color:var(--text2)">에어버스 A321</div>
+    </div>
+    <div class="flight-times">
+      <div class="flight-airport">
+        <div class="airport-time">11:25</div>
+        <div class="airport-code">ICN · 인천 T1</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-arrow-line"></div>
+        <div class="flight-duration">약 1시간 15분</div>
+      </div>
+      <div class="flight-airport">
+        <div class="airport-time">11:40</div>
+        <div class="airport-code">DLC · 저우수이쯔</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-header">
+      <div class="flight-airline">🛬</div>
+      <div class="flight-info">
+        <div class="flight-route">오는편 · 2026년 5월 3일</div>
+        <div class="flight-num">CZ695</div>
+      </div>
+      <div style="font-size:11px;color:var(--text2)">에어버스 A320</div>
+    </div>
+    <div class="flight-times">
+      <div class="flight-airport">
+        <div class="airport-time">14:00</div>
+        <div class="airport-code">DLC · 저우수이쯔</div>
+      </div>
+      <div class="flight-arrow">
+        <div class="flight-arrow-line"></div>
+        <div class="flight-duration">약 2시간 15분</div>
+      </div>
+      <div class="flight-airport">
+        <div class="airport-time">16:15</div>
+        <div class="airport-code">ICN · 인천 T1</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section">
+    <div class="section-title">🏨 숙소 정보</div>
+  </div>
+
+  <div class="hotel-card">
+    <div class="hotel-top">
+      <div class="hotel-name">🏠 No.8 칭니 아파트먼트</div>
+      <div class="hotel-address">26th Floor, Qingni No.8 Apartment, No.8 Jiefang Road, 중산구, 다롄, 랴오닝, 중국</div>
+      <div style="margin-top:10px">
+        <a class="map-btn" href="https://uri.amap.com/search?keyword=%E9%9D%92%E6%B3%A58%E5%8F%B7%E5%85%AC%E5%AF%93%20%E5%A4%A7%E8%BF%9E%E4%B8%AD%E5%B1%B1%E5%8C%BA&src=myapp&callnative=1" target="_blank">📍 지도 보기</a>
+      </div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-row"><span class="hotel-key">객실 타입</span><span class="hotel-val">엔조이어블 6인 가족 스위트룸</span></div>
+      <div class="hotel-row"><span class="hotel-key">뷰</span><span class="hotel-val highlight">75인치 TV + 고공 정원 전망</span></div>
+      <div class="hotel-row"><span class="hotel-key">체크인</span><span class="hotel-val">5월 1일 (금) 14:00 이후</span></div>
+      <div class="hotel-row"><span class="hotel-key">체크아웃</span><span class="hotel-val">5월 3일 (일) 14:00 이전</span></div>
+      <div class="hotel-row"><span class="hotel-key">침실</span><span class="hotel-val">3개 (퀸침대 3개)</span></div>
+      <div class="hotel-row"><span class="hotel-key">욕실</span><span class="hotel-val">1개</span></div>
+      <div class="hotel-row"><span class="hotel-key">식사</span><span class="hotel-val">불포함</span></div>
+      <div class="hotel-row"><span class="hotel-key">리워드</span><span class="hotel-val highlight">레이트 체크아웃 가능</span></div>
+      <div class="hotel-row"><span class="hotel-key">무료 취소</span><span class="hotel-val">5월 1일 12:00 이전</span></div>
+      <div class="hotel-row"><span class="hotel-key">연락처</span><span class="hotel-val" style="font-size:12px">+86-18909848811</span></div>
+    </div>
+  </div>
+
+  <div class="notice">
+    📌 <strong>확인번호:</strong> 9926022847792013 · PIN: 4225<br>
+    📌 <strong>예약번호:</strong> 1400824118350058
+  </div>
+
+  <div style="height:10px"></div>
+</div>
+
+<!-- ===== PAGE: 경비 & 환율 ===== -->
+<div class="page" id="page-budget">
+  <div style="height:16px"></div>
+
+  <div class="budget-total">
+    <div class="budget-label">총 예산</div>
+    <div class="budget-amount">300만원</div>
+    <div class="budget-per">1인당 60만원 × 5명</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">💰 지출 내역</div>
+  </div>
+
+  <div style="padding: 0 16px">
+    <div class="budget-item">
+      <div class="budget-item-left">
+        <div class="budget-icon">✈️</div>
+        <div>
+          <div class="budget-name">항공권</div>
+          <div class="budget-note">5인 왕복 · 중국남방항공</div>
+        </div>
+      </div>
+      <div class="budget-price">1,461,543원</div>
+    </div>
+    <div class="budget-bar-wrap">
+      <div class="budget-bar-label"><span>항공</span><span>49.1%</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:49.1%;background:linear-gradient(90deg,var(--red),var(--red-light))"></div></div>
+    </div>
+
+    <div class="budget-item">
+      <div class="budget-item-left">
+        <div class="budget-icon">🏨</div>
+        <div>
+          <div class="budget-name">숙소</div>
+          <div class="budget-note">칭니8호 · 2박 · 부가세 포함</div>
+        </div>
+      </div>
+      <div class="budget-price">407,046원</div>
+    </div>
+    <div class="budget-bar-wrap">
+      <div class="budget-bar-label"><span>숙소</span><span>13.7%</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:13.7%;background:linear-gradient(90deg,#1565C0,var(--blue))"></div></div>
+    </div>
+
+    <div class="budget-item">
+      <div class="budget-item-left">
+        <div class="budget-icon">🛡️</div>
+        <div>
+          <div class="budget-name">여행자 보험</div>
+          <div class="budget-note">5인</div>
+        </div>
+      </div>
+      <div class="budget-price">17,740원</div>
+    </div>
+    <div class="budget-bar-wrap">
+      <div class="budget-bar-label"><span>보험</span><span>0.6%</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:0.6%;background:var(--green)"></div></div>
+    </div>
+
+    <div class="budget-item">
+      <div class="budget-item-left">
+        <div class="budget-icon">💴</div>
+        <div>
+          <div class="budget-name">환전</div>
+          <div class="budget-note">5,000위안 · 평균 217.6원/위안</div>
+        </div>
+      </div>
+      <div class="budget-price gold">1,088,130원</div>
+    </div>
+    <div class="budget-bar-wrap">
+      <div class="budget-bar-label"><span>환전</span><span>36.6%</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" style="width:36.6%;background:linear-gradient(90deg,#E65100,var(--gold))"></div></div>
+    </div>
+
+    <div style="height:12px"></div>
+
+    <div class="budget-item" style="border-color:rgba(76,175,80,0.3);background:rgba(76,175,80,0.06)">
+      <div class="budget-item-left">
+        <div class="budget-icon">✅</div>
+        <div>
+          <div class="budget-name">총 지출</div>
+          <div class="budget-note">300만원 예산 대비</div>
+        </div>
+      </div>
+      <div class="budget-price">2,974,459원</div>
+    </div>
+
+    <div class="budget-item" style="border-color:rgba(76,175,80,0.3);background:rgba(76,175,80,0.06)">
+      <div class="budget-item-left">
+        <div class="budget-icon">💰</div>
+        <div>
+          <div class="budget-name">남는 금액</div>
+          <div class="budget-note">공항 샌드위치 or 추가 환전</div>
+        </div>
+      </div>
+      <div class="budget-price green">+25,541원</div>
+    </div>
+  </div>
+
+  <div style="height:8px"></div>
+  <div class="divider"></div>
+
+  <!-- 환율 변환기 -->
+  <div class="section">
+    <div class="section-title">💱 환율 변환기</div>
+  </div>
+
+  <div class="currency-card">
+    <div class="rate-info">
+      <span class="rate-label">기준 환율 (환전 기준)</span>
+      <span class="rate-val">1위안 = 217.6원</span>
+    </div>
+
+    <div id="converter-krw-to-cny">
+      <div class="currency-row">
+        <div class="currency-input-wrap">
+          <div class="currency-label">🇰🇷 한국 원 (KRW)</div>
+          <input class="currency-input" type="number" inputmode="numeric" id="krw-input" placeholder="0" value="">
+        </div>
+        <div class="currency-swap" id="swap-btn" style="touch-action:manipulation;cursor:pointer;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;padding-top:18px">⇄</div>
+        <div class="currency-input-wrap">
+          <div class="currency-label">🇨🇳 중국 위안 (CNY)</div>
+          <input class="currency-input" type="number" inputmode="numeric" id="cny-input" placeholder="0" value="">
+        </div>
+      </div>
+      <div class="currency-result" id="conv-result">
+        <div class="currency-result-num" id="conv-num">—</div>
+        <div class="currency-result-unit" id="conv-unit">금액을 입력하세요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 빠른 변환 -->
+  <div style="padding: 0 16px">
+    <div class="section-title" style="margin-top:16px">⚡ 빠른 위안 환산</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div class="budget-item" style="text-align:center;display:block;padding:10px">
+        <div style="font-size:16px;font-weight:700;color:var(--gold);font-family:'Montserrat',sans-serif">10위안</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px">≈ 2,176원</div>
+      </div>
+      <div class="budget-item" style="text-align:center;display:block;padding:10px">
+        <div style="font-size:16px;font-weight:700;color:var(--gold);font-family:'Montserrat',sans-serif">50위안</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px">≈ 10,880원</div>
+      </div>
+      <div class="budget-item" style="text-align:center;display:block;padding:10px">
+        <div style="font-size:16px;font-weight:700;color:var(--gold);font-family:'Montserrat',sans-serif">100위안</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px">≈ 21,760원</div>
+      </div>
+      <div class="budget-item" style="text-align:center;display:block;padding:10px">
+        <div style="font-size:16px;font-weight:700;color:var(--gold);font-family:'Montserrat',sans-serif">500위안</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px">≈ 108,800원</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:10px"></div>
+</div>
+
+<!-- ===== PAGE: 꿀팁 ===== -->
+<div class="page" id="page-tips">
+  <div style="height:16px"></div>
+
+  <div class="section">
+    <div class="section-title">📱 필수 앱 & 준비물</div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-title">💳 결제 — 가장 중요!</div>
+    <div class="tip-body">
+      중국은 거의 <strong>QR 코드 결제</strong> 위주. 현금 사용처가 점점 줄고 있음.<br><br>
+      ✅ <strong>알리페이(Alipay)</strong> — 한국 카드 연동 가능. 출국 전 반드시 앱 설치 + 한국 카드 등록 및 활성화<br>
+      ✅ <strong>위챗페이(WeChat Pay)</strong> — 알리페이 함께 설치 추천<br>
+      ✅ <strong>현금</strong> — 비상용으로 소액만 (약 200~300위안)
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-title">🌐 인터넷 — 구글 차단!</div>
+    <div class="tip-body">
+      중국은 구글, 카카오맵, 네이버지도 모두 차단됨.<br><br>
+      ✅ <strong>바이두지도 (百度地图)</strong> — 메인 지도앱 (한국어 지원 일부)<br>
+      ✅ <strong>가오더지도 (高德地图/AMap)</strong> — 더 직관적, 영어 지원 양호<br>
+      ✅ <strong>VPN</strong> — 카톡 등 사용 원한다면 사전에 설치 (현지 설치 불가)<br>
+      ✅ <strong>이심(eSIM)</strong> 또는 중국 유심 사전 구매 추천
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-title">🔌 전기 & 기타 준비물</div>
+    <div class="tip-body">
+      ✅ <strong>멀티 어댑터</strong> — 중국은 I형 플러그 (납작 2핀)<br>
+      ✅ <strong>여권 사본</strong> — 반드시 준비 (분실 대비)<br>
+      ✅ <strong>여권 유효기간</strong> — 6개월 이상 남아 있는지 확인<br>
+      ✅ 한국 → 중국 <strong>무비자</strong> (2025년 12월까지 시행 중)
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:8px">
+    <div class="section-title">🗺️ 대련 여행 추천 장소</div>
+  </div>
+
+  <div class="tip-card" style="border-left-color:var(--blue)">
+    <div class="tip-title" style="color:var(--blue)">🌊 추가 추천 — 어인부두 (渔人码头)</div>
+    <div class="tip-body">
+      대련에서 가장 낭만적인 항구 거리. 고요한 항구 정취 + 이국적인 카페 거리. 일정이 여유롭다면 Day 1 동방수성 이후 연계 추천.
+    </div>
+  </div>
+
+  <div class="tip-card" style="border-left-color:var(--blue)">
+    <div class="tip-title" style="color:var(--blue)">🏔️ 추가 추천 — 연화산 전망대</div>
+    <div class="tip-body">
+      대련 시내 전경 + 야경 감상. 전동카 탑승 가능. 성해광장과 함께 야경 투어로 묶으면 좋음. (입장권 사전 예약 시 27% 할인)
+    </div>
+  </div>
+
+  <div class="tip-card" style="border-left-color:var(--green)">
+    <div class="tip-title" style="color:var(--green)">🦐 추가 추천 — 도원 아침시장</div>
+    <div class="tip-body">
+      수산시장처럼 신선한 해산물 구매 후 시장 내 식당에서 원하는 방식으로 조리해줌. 가격은 한국의 약 1/3. <strong>3일차 아침</strong>에 시간 맞으면 강추!
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:8px">
+    <div class="section-title">✅ 출발 전 체크리스트</div>
+  </div>
+
+  <div style="padding: 0 16px" id="checklist">
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">여권 확인 (유효기간 6개월+)</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">알리페이 설치 + 한국 카드 등록</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">이심(eSIM) 또는 유심 구매</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">VPN 앱 사전 설치 (필요 시)</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">바이두지도 or 가오더지도 설치</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">멀티 어댑터 챙기기</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">여권 사본 출력</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">온라인 체크인 (출발 24시간 전)</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">정원원 발마사지 예약 문의</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">가벼운 겉옷 챙기기 (5월 쌀쌀)</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">시딩 브레이크타임 확인 (15시~)</div>
+    </label>
+    <label class="checklist-item">
+      <input type="checkbox" class="check-input" style="display:none">
+      <div class="check-box">☐</div>
+      <div class="check-text">5,000위안 환전 완료</div>
+    </label>
+  </div>
+
+  <div style="height:20px"></div>
+</div>
+
+<script>
+  // ── 카톡 인앱브라우저 포함 모든 환경 호환 ──
+  // touchend/preventDefault 완전 제거 → click 단독 사용
+  // 인터랙티브 요소: <button>, <a href>, <label+checkbox> 만 사용
+
+  // 탭 전환: CSS :target 방식으로 처리 (JS 불필요)
+
+  // 체크리스트 — label+checkbox가 브라우저 네이티브로 처리
+  // change 이벤트로 시각적 상태만 업데이트
+  document.querySelectorAll('.check-input').forEach(function(input) {
+    input.addEventListener('change', function() {
+      var item = input.closest('.checklist-item');
+      var box = item.querySelector('.check-box');
+      if (input.checked) {
+        item.classList.add('checked');
+        box.textContent = '✓';
+        box.classList.add('done');
+      } else {
+        item.classList.remove('checked');
+        box.textContent = '☐';
+        box.classList.remove('done');
+      }
+    });
+  });
+
+  // 환율 변환기
+  var RATE = 217.6;
+
+  document.getElementById('krw-input').addEventListener('input', function() {
+
+  document.getElementById('krw-input').addEventListener('input', function() {
+    const val = parseFloat(this.value);
+    if (!isNaN(val) && val > 0) {
+      const cny = (val / RATE).toFixed(2);
+      document.getElementById('cny-input').value = '';
+      document.getElementById('conv-num').textContent = parseFloat(cny).toLocaleString('ko-KR') + ' 위안';
+      document.getElementById('conv-unit').textContent = val.toLocaleString('ko-KR') + '원 → 중국 위안';
+    } else {
+      document.getElementById('conv-num').textContent = '—';
+      document.getElementById('conv-unit').textContent = '금액을 입력하세요';
+    }
+  });
+
+  document.getElementById('cny-input').addEventListener('input', function() {
+    const val = parseFloat(this.value);
+    if (!isNaN(val) && val > 0) {
+      const krw = Math.round(val * RATE);
+      document.getElementById('krw-input').value = '';
+      document.getElementById('conv-num').textContent = krw.toLocaleString('ko-KR') + '원';
+      document.getElementById('conv-unit').textContent = val + '위안 → 한국 원';
+    } else {
+      document.getElementById('conv-num').textContent = '—';
+      document.getElementById('conv-unit').textContent = '금액을 입력하세요';
+    }
+  });
+
+  function swapCurrency() {
+    document.getElementById('krw-input').value = '';
+    document.getElementById('cny-input').value = '';
+    document.getElementById('conv-num').textContent = '—';
+    document.getElementById('conv-unit').textContent = '금액을 입력하세요';
+  }
+  var swapBtn = document.getElementById('swap-btn');
+  if (swapBtn) {
+    swapBtn.addEventListener('click', swapCurrency);
+  }
+
+  // CHECKLIST
+  function toggleCheck(item) {
+    item.classList.toggle('checked');
+    const box = item.querySelector('.check-box');
+    if (item.classList.contains('checked')) {
+      box.textContent = '✓';
+      box.classList.add('done');
+    } else {
+      box.textContent = '☐';
+      box.classList.remove('done');
+    }
+  }
+
+  // :target 있으면 default-active(일정 탭) 표시 제거
+  (function() {
+    if (window.location.hash && window.location.hash !== '#page-schedule') {
+      var def = document.querySelector('.tab-link.default-active');
+      if (def) def.classList.remove('default-active');
+    }
+    // 탭 클릭 시 default-active 제거
+    document.querySelectorAll('.tab-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.tab-link').forEach(function(l) {
+          l.classList.remove('default-active');
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
